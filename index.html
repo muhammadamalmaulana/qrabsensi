@@ -1,0 +1,3330 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="executive">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Smart Presensi Pro 3D &bull; Enterprise Attendance Hub</title>
+  
+  <!-- Premium Fonts: Plus Jakarta Sans, Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6.5.1 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Three.js (WebGL 3D Engine for Professional Spatial Background) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- HTML5 QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       ENTERPRISE 3D DESIGN SYSTEM & MULTI-THEME ENGINE
+       ========================================================================== */
+    :root {
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* THEME 1: EXECUTIVE OBSIDIAN (Default Enterprise Luxury) */
+      --bg-base: #070a13;
+      --bg-gradient: radial-gradient(circle at 50% -15%, #182038 0%, #0a0f1d 45%, #04060c 100%);
+      
+      --card-bg: rgba(13, 19, 36, 0.76);
+      --card-border: rgba(99, 102, 241, 0.22);
+      --card-border-hover: rgba(99, 102, 241, 0.5);
+      --card-shadow: 
+        0 24px 60px -12px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(99, 102, 241, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.16);
+
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #475569;
+
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+      --primary-glow: rgba(99, 102, 241, 0.45);
+
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --accent-glow: rgba(16, 185, 129, 0.4);
+
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --cyan: #06b6d4;
+
+      --surface-glass: rgba(17, 24, 45, 0.65);
+      --surface-hover: rgba(255, 255, 255, 0.06);
+      --bevel-top: rgba(255, 255, 255, 0.14);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 30px;
+    }
+
+    /* THEME 2: CYBER EMERALD (Matrix Luxury & Jade Mint) */
+    [data-theme="emerald"] {
+      --bg-base: #030b08;
+      --bg-gradient: radial-gradient(circle at 50% -15%, #0c3326 0%, #04140e 50%, #020705 100%);
+      --card-bg: rgba(6, 26, 18, 0.76);
+      --card-border: rgba(16, 185, 129, 0.28);
+      --card-border-hover: rgba(16, 185, 129, 0.6);
+      --card-shadow: 
+        0 24px 60px -12px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(16, 185, 129, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18);
+
+      --primary: #10b981;
+      --primary-light: #34d399;
+      --primary-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
+      --primary-glow: rgba(16, 185, 129, 0.5);
+
+      --accent: #06b6d4;
+      --accent-light: #22d3ee;
+      --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+      --accent-glow: rgba(6, 182, 212, 0.4);
+
+      --surface-glass: rgba(8, 32, 22, 0.65);
+    }
+
+    /* THEME 3: QUANTUM VIOLET (Velvet Amethyst & Deep Space) */
+    [data-theme="quantum"] {
+      --bg-base: #090514;
+      --bg-gradient: radial-gradient(circle at 50% -15%, #2a1452 0%, #0f0724 50%, #05020c 100%);
+      --card-bg: rgba(22, 12, 45, 0.76);
+      --card-border: rgba(168, 85, 247, 0.28);
+      --card-border-hover: rgba(168, 85, 247, 0.6);
+      --card-shadow: 
+        0 24px 60px -12px rgba(0, 0, 0, 0.9),
+        0 0 35px rgba(168, 85, 247, 0.18),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18);
+
+      --primary: #a855f7;
+      --primary-light: #c084fc;
+      --primary-gradient: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+      --primary-glow: rgba(168, 85, 247, 0.5);
+
+      --accent: #ec4899;
+      --accent-light: #f472b6;
+      --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+      --accent-glow: rgba(236, 72, 153, 0.4);
+
+      --surface-glass: rgba(28, 16, 56, 0.65);
+    }
+
+    /* THEME 4: STUDIO LIGHT (VisionOS Daylight Glass) */
+    [data-theme="light"] {
+      --bg-base: #f0f4f9;
+      --bg-gradient: radial-gradient(circle at 50% -15%, #e0e7ff 0%, #f1f5f9 50%, #e2e8f0 100%);
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-border: rgba(226, 232, 240, 0.95);
+      --card-border-hover: rgba(99, 102, 241, 0.45);
+      --card-shadow: 
+        0 20px 45px -10px rgba(71, 85, 105, 0.18),
+        0 0 25px rgba(99, 102, 241, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.95);
+
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
+
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+      --primary-glow: rgba(79, 70, 229, 0.35);
+
+      --accent: #059669;
+      --accent-light: #10b981;
+      --accent-gradient: linear-gradient(135deg, #059669 0%, #047857 100%);
+      --accent-glow: rgba(5, 150, 105, 0.35);
+
+      --surface-glass: rgba(248, 250, 252, 0.85);
+      --surface-hover: rgba(0, 0, 0, 0.04);
+      --bevel-top: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Reset & Base Setup */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      background-image: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 18px 85px;
+      overflow-x: hidden;
+      perspective: 1200px;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* WebGL 3D Canvas Background */
+    #webgl-bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.65;
+    }
+
+    /* Ambient Spatial Lighting */
+    .spatial-light-aura {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.26;
+      animation: auraFloat 18s ease-in-out infinite alternate;
+    }
+    .aura-1 { top: -140px; left: 20%; width: 550px; height: 550px; background: var(--primary); }
+    .aura-2 { bottom: -140px; right: 20%; width: 520px; height: 520px; background: var(--accent); animation-delay: -6s; }
+
+    @keyframes auraFloat {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(60px, -40px, 0) scale(1.15); }
+    }
+
+    /* Master 3D Viewport */
+    .spatial-viewport {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1320px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      transform-style: preserve-3d;
+    }
+
+    /* ==========================================================================
+       TOP FLOATING 3D COMMAND DOCK
+       ========================================================================== */
+    .top-command-dock {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: var(--card-shadow);
+      transform: translateZ(15px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-command-dock::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+      opacity: 0.8;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* 3D Holographic Crest Logo */
+    .brand-crest-3d {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--primary-gradient);
+      box-shadow: 0 8px 24px var(--primary-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      transform: perspective(600px) rotateY(-8deg) rotateX(8deg);
+      transition: transform 0.3s ease;
+    }
+    .brand-crest-3d:hover {
+      transform: perspective(600px) rotateY(15deg) rotateX(-10deg) scale(1.06);
+    }
+    .brand-crest-3d::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+      transform: rotate(45deg);
+      animation: crestGlint 4s infinite linear;
+    }
+    @keyframes crestGlint {
+      0% { transform: translateX(-100%) rotate(45deg); }
+      20%, 100% { transform: translateX(100%) rotate(45deg); }
+    }
+
+    .brand-headings h1 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+    }
+
+    .badge-pro-pill {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: rgba(99, 102, 241, 0.16);
+      border: 1px solid var(--primary);
+      color: var(--primary-light);
+      letter-spacing: 0.5px;
+    }
+
+    .time-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+    }
+    .time-badge .sec-pulse {
+      color: var(--accent-light);
+      font-weight: 700;
+    }
+
+    /* Dock Actions: Status, Theme, Audio, Sheets */
+    .dock-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 3D Pulse Status Capsule */
+    .status-capsule-3d {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-radius: 30px;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .pulse-crystal {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--warning);
+      box-shadow: 0 0 10px var(--warning);
+      animation: pulseCrystal 2s infinite;
+    }
+    .pulse-crystal.online {
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .pulse-crystal.offline {
+      background: var(--danger);
+      box-shadow: 0 0 12px var(--danger);
+    }
+    @keyframes pulseCrystal {
+      0%, 100% { transform: scale(0.9); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    /* Multi-Theme Selector */
+    .theme-palette-bar {
+      display: flex;
+      align-items: center;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 3px 6px;
+      gap: 4px;
+    }
+    .theme-pill-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .theme-pill-dot:hover { transform: scale(1.18); }
+    .theme-pill-dot.active {
+      border-color: #ffffff;
+      box-shadow: 0 0 10px var(--primary);
+      transform: scale(1.15);
+    }
+    .dot-executive { background: linear-gradient(135deg, #6366f1, #10b981); }
+    .dot-emerald   { background: linear-gradient(135deg, #10b981, #06b6d4); }
+    .dot-quantum   { background: linear-gradient(135deg, #a855f7, #ec4899); }
+    .dot-light     { background: linear-gradient(135deg, #f8fafc, #94a3b8); }
+
+    /* Tactile 3D Buttons (Pushable Depth) */
+    .btn-3d-exec {
+      border: none;
+      background: var(--surface-glass);
+      color: var(--text-main);
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      text-decoration: none;
+      border: 1px solid var(--card-border);
+      box-shadow: 
+        0 4px 0 rgba(0, 0, 0, 0.4),
+        0 8px 18px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px var(--bevel-top);
+      transform: translateY(0);
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .btn-3d-exec:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 6px 0 rgba(0, 0, 0, 0.45),
+        0 12px 22px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+    }
+    .btn-3d-exec:active {
+      transform: translateY(3px);
+      box-shadow: 
+        0 1px 0 rgba(0, 0, 0, 0.4),
+        0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-primary-3d {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 
+        0 5px 0 rgba(30, 27, 75, 0.8),
+        0 10px 25px var(--primary-glow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    }
+    .btn-primary-3d:hover {
+      box-shadow: 
+        0 7px 0 rgba(30, 27, 75, 0.8),
+        0 14px 30px var(--primary-glow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.45);
+    }
+    .btn-primary-3d:active {
+      box-shadow: 0 1px 0 rgba(30, 27, 75, 0.8);
+    }
+
+    .btn-stop-3d {
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+      box-shadow: 0 5px 0 #7f1d1d !important;
+      color: #fff !important;
+    }
+
+    .btn-icon-3d {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+    }
+
+    /* Toast Notification Strip */
+    .toast-strip-3d {
+      display: none;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 600;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--card-shadow);
+      transform: translateZ(25px);
+      animation: toastSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border: 1px solid transparent;
+    }
+    @keyframes toastSlide {
+      from { opacity: 0; transform: translateY(-10px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .toast-strip-3d.success {
+      display: flex;
+      background: rgba(16, 185, 129, 0.16);
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.35);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+    }
+    .toast-strip-3d.error {
+      display: flex;
+      background: rgba(239, 68, 68, 0.16);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.35);
+      box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+    }
+    .toast-strip-3d.warning {
+      display: flex;
+      background: rgba(245, 158, 11, 0.16);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .toast-strip-3d.info {
+      display: flex;
+      background: rgba(99, 102, 241, 0.16);
+      color: #818cf8;
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    /* ==========================================================================
+       DUAL-PANEL 3D WORKSPACE
+       ========================================================================== */
+    .dual-workspace-3d {
+      display: grid;
+      grid-template-columns: 1.05fr 1.35fr;
+      gap: 22px;
+      align-items: start;
+      transform-style: preserve-3d;
+    }
+
+    @media (max-width: 1024px) {
+      .dual-workspace-3d {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+
+    /* 3D Frosted Glass Card */
+    .panel-card-3d {
+      background: var(--card-bg);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .panel-card-3d:hover {
+      border-color: var(--card-border-hover);
+      box-shadow: 
+        0 25px 60px -10px rgba(0, 0, 0, 0.85),
+        0 0 40px var(--primary-glow),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    }
+
+    /* Specular Light Glare */
+    .glare-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: radial-gradient(circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 70%);
+      z-index: 10;
+      mix-blend-mode: overlay;
+    }
+
+    /* Segmented Tab Dock */
+    .segmented-dock-3d {
+      display: flex;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 5px;
+      gap: 5px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+      transform: translateZ(10px);
+    }
+
+    .dock-tab-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .dock-tab-btn:hover {
+      color: var(--text-main);
+      background: var(--surface-hover);
+    }
+    .dock-tab-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      box-shadow: 
+        0 4px 14px var(--primary-glow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .tab-view-3d {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      animation: viewSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      transform-style: preserve-3d;
+    }
+    .tab-view-3d.active {
+      display: flex;
+    }
+    @keyframes viewSlide {
+      from { opacity: 0; transform: translateY(10px) translateZ(-15px); }
+      to { opacity: 1; transform: translateY(0) translateZ(0); }
+    }
+
+    /* ==========================================================================
+       TAB 1: PRECISION 3D SCANNER HUD
+       ========================================================================== */
+    .scanner-pedestal-3d {
+      position: relative;
+      background: #020611;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1.5px solid var(--card-border);
+      box-shadow: 
+        inset 0 0 50px rgba(0, 0, 0, 0.9),
+        0 15px 40px rgba(0, 0, 0, 0.6),
+        0 0 30px var(--primary-glow);
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateZ(15px);
+    }
+
+    #qr-reader {
+      width: 100% !important;
+      min-height: 320px;
+      background: #020611;
+      border: none !important;
+    }
+    #qr-reader video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      border-radius: var(--radius-lg) !important;
+      display: block !important;
+    }
+    #qr-reader > div:not(:first-child) { display: none !important; }
+
+    /* Precision Targeting Viewfinder Overlay */
+    .precision-viewfinder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Concentric Radar Rings */
+    .radar-circle-outer {
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      animation: radarSpin 22s linear infinite;
+    }
+    .radar-circle-inner {
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      border: 1px dotted var(--primary);
+      opacity: 0.5;
+      animation: radarSpinRev 16s linear infinite;
+    }
+    @keyframes radarSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes radarSpinRev {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Reticle Frame */
+    .reticle-box {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      border-radius: 20px;
+      box-shadow: 0 0 0 9999px rgba(3, 7, 18, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .reticle-corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-color: var(--primary-light);
+      border-style: solid;
+      border-width: 0;
+      filter: drop-shadow(0 0 8px var(--primary));
+    }
+    .rc-tl { top: -2px; left: -2px; border-top-width: 4px; border-left-width: 4px; border-radius: 10px 0 0 0; }
+    .rc-tr { top: -2px; right: -2px; border-top-width: 4px; border-right-width: 4px; border-radius: 0 10px 0 0; }
+    .rc-bl { bottom: -2px; left: -2px; border-bottom-width: 4px; border-left-width: 4px; border-radius: 0 0 0 10px; }
+    .rc-br { bottom: -2px; right: -2px; border-bottom-width: 4px; border-right-width: 4px; border-radius: 0 0 10px 0; }
+
+    /* Crosshairs */
+    .crosshair-target {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 26px;
+      height: 26px;
+      opacity: 0.45;
+    }
+    .crosshair-target::before, .crosshair-target::after {
+      content: '';
+      position: absolute;
+      background: var(--primary-light);
+    }
+    .crosshair-target::before { top: 12px; left: 0; width: 26px; height: 2px; }
+    .crosshair-target::after { top: 0; left: 12px; width: 2px; height: 26px; }
+
+    /* Laser Sweep Beam */
+    .laser-scan-beam {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-light), #fff, var(--accent-light), transparent);
+      box-shadow: 0 0 16px var(--primary-light), 0 0 32px var(--accent-light);
+      animation: laserSweep 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      border-radius: 4px;
+    }
+    @keyframes laserSweep {
+      0% { top: 12px; opacity: 0.7; }
+      50% { top: 190px; opacity: 1; }
+      100% { top: 12px; opacity: 0.7; }
+    }
+
+    .viewfinder-capsule {
+      position: absolute;
+      bottom: 14px;
+      padding: 6px 16px;
+      background: rgba(6, 10, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Scanner Toolbar */
+    .scanner-action-bar {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 12px;
+      transform: translateZ(10px);
+    }
+
+    /* Manual Quick Entry */
+    .manual-punch-bar {
+      display: flex;
+      gap: 8px;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 6px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    .manual-punch-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 8px 14px;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .manual-punch-input:focus { outline: none; }
+    .manual-punch-input::placeholder { color: var(--text-subtle); }
+
+    .scanner-sub-links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .sub-link-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--primary-light);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .sub-link-item:hover { text-decoration: underline; }
+
+    /* ==========================================================================
+       TAB 2: REAL 3D FLIP STUDENT ID CARD (KTM 3D INTERACTIVE)
+       ========================================================================== */
+    .ktm-hub-3d {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      perspective: 1200px;
+    }
+
+    .ktm-search-row {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+    }
+    .ktm-search-wrap {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .ktm-search-wrap i {
+      position: absolute;
+      left: 14px;
+      color: var(--primary-light);
+      font-size: 14px;
+    }
+    .ktm-search-field {
+      width: 100%;
+      padding: 12px 14px 12px 42px;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 13px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+    .ktm-search-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 3D Real Flipping Card Structure */
+    .ktm-flip-card-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 270px;
+      perspective: 1200px;
+      margin: 8px 0;
+      display: none;
+      cursor: pointer;
+    }
+    .ktm-flip-card-wrapper.active {
+      display: block;
+      animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: rotateX(25deg) scale(0.9); }
+      to { opacity: 1; transform: rotateX(0deg) scale(1); }
+    }
+
+    .ktm-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border-radius: 20px;
+    }
+    .ktm-flip-card-wrapper.flipped .ktm-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .ktm-card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.85),
+        0 0 35px var(--primary-glow),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* FRONT FACE: Official Titanium Smart ID */
+    .ktm-face-front {
+      background: linear-gradient(135deg, #0b1120 0%, #1e1b4b 50%, #064e3b 100%);
+    }
+    .ktm-face-front::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        115deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(99, 102, 241, 0.2) 48%,
+        rgba(255, 255, 255, 0.3) 52%,
+        transparent 65%
+      );
+      transform: rotate(30deg);
+      pointer-events: none;
+      animation: cardShimmer 7s infinite linear;
+    }
+    @keyframes cardShimmer {
+      0% { transform: translateY(-100%) rotate(30deg); }
+      100% { transform: translateY(100%) rotate(30deg); }
+    }
+
+    .ktm-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+    .ktm-univ-text h3 {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+    .ktm-univ-text p {
+      font-size: 10px;
+      color: var(--primary-light);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+    }
+
+    .ktm-gold-chip {
+      width: 38px;
+      height: 28px;
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+    .ktm-gold-chip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    .ktm-gold-chip::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .ktm-mid-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 2;
+    }
+    .ktm-avatar-3d {
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      border: 2px solid #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .ktm-meta-data { flex: 1; }
+    .ktm-meta-data .name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .ktm-meta-data .nim {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-light);
+      margin-top: 2px;
+    }
+    .ktm-meta-data .prodi {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 2px;
+    }
+
+    .ktm-qr-housing {
+      padding: 6px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    .ktm-qr-housing img {
+      display: block;
+      width: 74px;
+      height: 74px;
+      border-radius: 6px;
+    }
+
+    .ktm-btm-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    /* BACK FACE: Academic Magnetic Credentials */
+    .ktm-face-back {
+      background: linear-gradient(135deg, #090d16 0%, #151b2e 100%);
+      transform: rotateY(180deg);
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .mag-stripe {
+      width: calc(100% + 48px);
+      margin: -20px -24px 10px -24px;
+      height: 42px;
+      background: #020408;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .back-credentials {
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .barcode-strip {
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .barcode-lines {
+      width: 100%;
+      height: 24px;
+      background: repeating-linear-gradient(
+        90deg,
+        #000 0px,
+        #000 2px,
+        transparent 2px,
+        transparent 4px,
+        #000 4px,
+        #000 7px,
+        transparent 7px,
+        transparent 8px
+      );
+    }
+    .barcode-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .ktm-flip-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .ktm-flip-hint:hover { color: var(--primary-light); }
+
+    /* ==========================================================================
+       TAB 3: QR KELAS PROYECTOR MODE 3D
+       ========================================================================== */
+    .projector-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .qr-projector-frame {
+      padding: 16px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 40px var(--primary-glow);
+      transform: translateZ(25px);
+      transition: transform 0.3s ease;
+    }
+    .qr-projector-frame:hover {
+      transform: translateZ(40px) scale(1.03);
+    }
+    .qr-projector-frame img {
+      display: block;
+      width: 200px;
+      height: 200px;
+      border-radius: 14px;
+    }
+
+    /* ==========================================================================
+       RIGHT PANEL: 3D METRICS & LIVE ATTENDANCE TABLE
+       ========================================================================== */
+    .panel-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-title i {
+      font-size: 18px;
+      color: var(--primary-light);
+    }
+    .panel-title h2 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--text-main);
+    }
+
+    /* 3D Stat Blocks Grid */
+    .stat-blocks-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      transform-style: preserve-3d;
+    }
+
+    .stat-block-3d {
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px var(--bevel-top);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateZ(10px);
+    }
+    .stat-block-3d:hover {
+      transform: translateY(-4px) translateZ(25px);
+      border-color: var(--primary);
+      box-shadow: 
+        0 18px 35px rgba(0, 0, 0, 0.4),
+        0 0 25px var(--primary-glow);
+    }
+    .stat-block-3d::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+    }
+    .stat-block-3d.total::before { background: var(--primary-gradient); }
+    .stat-block-3d.hadir::before { background: var(--accent-gradient); }
+    .stat-block-3d.belum::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+
+    .stat-block-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stat-block-val {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1;
+      margin: 4px 0;
+    }
+    .stat-block-sub {
+      font-size: 11px;
+      color: var(--text-subtle);
+    }
+
+    /* Volumetric Progress Cylinder */
+    .progress-cylinder {
+      width: 100%;
+      height: 10px;
+      background: var(--surface-glass);
+      border-radius: 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-cylinder-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: 0 0 15px var(--primary);
+      border-radius: 20px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Ticker Ribbon */
+    .ticker-ribbon-3d {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .ticker-badge {
+      padding: 3px 8px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid var(--primary);
+      color: var(--primary-light);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .ticker-message {
+      color: var(--text-muted);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    /* Search & Filter Toolbar */
+    .table-tools-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .table-search-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .table-search-wrap i {
+      position: absolute;
+      left: 14px;
+      color: var(--primary-light);
+      font-size: 14px;
+    }
+    .table-search-input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 13px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+    .table-search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .table-filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    .filter-pill-btn {
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--card-border);
+      background: var(--surface-glass);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+    .filter-pill-btn:hover {
+      background: var(--surface-hover);
+      color: var(--text-main);
+    }
+    .filter-pill-btn.active {
+      background: var(--primary-gradient);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    /* Modern Frosted Glass Table */
+    .table-scroll-container {
+      background: var(--surface-glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    .table-scroll-container::-webkit-scrollbar { width: 6px; }
+    .table-scroll-container::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+    table.attendance-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12px;
+    }
+    table.attendance-table th {
+      padding: 12px 14px;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.8px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      z-index: 5;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.attendance-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      vertical-align: middle;
+      transition: background 0.2s;
+    }
+    table.attendance-table tr:hover td {
+      background: rgba(99, 102, 241, 0.05);
+    }
+
+    .user-profile-flex {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .user-avatar-initial {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--primary-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 4px 10px var(--primary-glow);
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .status-chip.hadir {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+    }
+    .status-chip.belum {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .btn-table-action {
+      padding: 5px 9px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: var(--surface-glass);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-table-action:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* ==========================================================================
+       POPUP MODAL PRESENSI BERHASIL
+       ========================================================================== */
+    .modal-overlay-3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(4, 7, 18, 0.8);
+      backdrop-filter: blur(16px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      perspective: 1200px;
+    }
+    .modal-overlay-3d.show {
+      display: flex;
+      animation: modalFadeIn 0.25s ease;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-dialog-3d {
+      background: var(--card-bg);
+      border: 1.5px solid var(--primary);
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 
+        0 30px 70px rgba(0, 0, 0, 0.9),
+        0 0 50px var(--primary-glow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      animation: modalZoom3D 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-style: preserve-3d;
+    }
+    @keyframes modalZoom3D {
+      0% { transform: scale(0.7) rotateX(20deg) translateZ(-80px); opacity: 0; }
+      100% { transform: scale(1) rotateX(0deg) translateZ(0); opacity: 1; }
+    }
+
+    .modal-trophy {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: 0 10px 30px var(--accent-glow);
+      animation: trophyBeat 2s infinite alternate;
+    }
+    @keyframes trophyBeat {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); box-shadow: 0 15px 40px var(--accent-glow); }
+    }
+
+    .modal-details-card {
+      width: 100%;
+      background: var(--surface-glass);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid var(--card-border);
+    }
+    .modal-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-detail-row span:first-child { color: var(--text-muted); font-size: 12px; }
+    .modal-detail-row span:last-child { font-weight: 700; color: var(--text-main); }
+
+    /* Fullscreen Projector Overlay */
+    .projector-fullscreen-view {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #030712;
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    .projector-fullscreen-view.active {
+      display: flex;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    /* Mobile Bottom Navigation */
+    .mobile-bottom-dock {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--card-border);
+      padding: 8px 12px;
+      display: none;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+    }
+    @media (max-width: 992px) {
+      .mobile-bottom-dock { display: flex; }
+      body { padding-bottom: 90px; }
+    }
+    .m-btn-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 700;
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .m-btn-nav i { font-size: 18px; }
+    .m-btn-nav.active { color: var(--primary-light); }
+    .m-btn-nav.fab-scanner {
+      background: var(--primary-gradient);
+      color: #fff !important;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-top: -25px;
+      box-shadow: 0 8px 25px var(--primary-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 12px 10px 85px 10px; }
+      .top-command-dock { padding: 12px 14px; border-radius: var(--radius-md); }
+      .brand-headings h1 { font-size: 17px; }
+      .stat-blocks-grid { gap: 8px; }
+      .stat-block-3d { padding: 12px 10px; }
+      .stat-block-val { font-size: 22px; }
+      .panel-card-3d { padding: 16px; border-radius: var(--radius-lg); }
+      .reticle-box { width: 180px; height: 180px; }
+      .radar-circle-outer { width: 220px; height: 220px; }
+      .radar-circle-inner { width: 190px; height: 190px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Three.js Spatial WebGL Canvas -->
+  <canvas id="webgl-bg-canvas"></canvas>
+
+  <!-- Ambient Spatial Glows -->
+  <div class="spatial-light-aura aura-1"></div>
+  <div class="spatial-light-aura aura-2"></div>
+
+  <!-- Master Spatial Viewport -->
+  <div class="spatial-viewport">
+    
+    <!-- Top 3D Floating Command Dock -->
+    <header class="top-command-dock">
+      <div class="brand-section">
+        <div class="brand-crest-3d">
+          <i class="fas fa-qrcode"></i>
+        </div>
+        <div class="brand-headings">
+          <h1>Smart Presensi <span class="badge-pro-pill">PRO 3D</span></h1>
+          <div class="time-badge">
+            <i class="far fa-clock" style="color:var(--primary-light);"></i>
+            <span id="liveClock">--:--:-- WIB</span> &bull; 
+            <span id="liveDateStr">Hari Ini</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock-actions">
+        <!-- Live Connection Status Capsule -->
+        <div class="status-capsule-3d" title="Status Sinkron Google Sheets">
+          <span class="pulse-crystal" id="statusDot"></span>
+          <span id="statusLabel">Memeriksa jaringan...</span>
+        </div>
+
+        <!-- 4-Theme Executive Switcher -->
+        <div class="theme-palette-bar" title="Ganti Tema Warna">
+          <div class="theme-pill-dot dot-executive active" onclick="setExecutiveTheme('executive')" title="Executive Obsidian"></div>
+          <div class="theme-pill-dot dot-emerald" onclick="setExecutiveTheme('emerald')" title="Cyber Emerald"></div>
+          <div class="theme-pill-dot dot-quantum" onclick="setExecutiveTheme('quantum')" title="Quantum Violet"></div>
+          <div class="theme-pill-dot dot-light" onclick="setExecutiveTheme('light')" title="Studio Light"></div>
+        </div>
+
+        <button class="btn-3d-exec btn-icon-3d" id="btnAudioToggle" title="Efek Suara Audio Chime" onclick="toggleAudioFeedback()">
+          <i class="fas fa-volume-up" id="audioIcon"></i>
+        </button>
+
+        <a id="sheetLink" href="#" target="_blank" class="btn-3d-exec btn-icon-3d" title="Buka Spreadsheet di Google Sheets">
+          <i class="fas fa-file-excel" style="color: #10b981;"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Global Status Toast Strip -->
+    <div class="toast-strip-3d" id="toastStrip">
+      <i class="fas fa-info-circle" id="toastIcon"></i>
+      <span id="toastText">Pesan status sistem</span>
+    </div>
+
+    <!-- Main Dual-Panel 3D Workspace -->
+    <div class="dual-workspace-3d">
+      
+      <!-- ====================================================================
+           LEFT PANEL: 3D SCANNER HUD & GENERATOR HUB
+           ==================================================================== -->
+      <section class="panel-card-3d" id="leftPanel3D">
+        <div class="glare-effect"></div>
+
+        <!-- Segmented Tab Dock -->
+        <nav class="segmented-dock-3d">
+          <button class="dock-tab-btn active" id="tabBtnScanner" onclick="switch3DTab('scanner')">
+            <i class="fas fa-camera"></i> <span>Scanner HUD</span>
+          </button>
+          <button class="dock-tab-btn" id="tabBtnKtm" onclick="switch3DTab('ktm')">
+            <i class="fas fa-id-card"></i> <span>KTM 3D Flip</span>
+          </button>
+          <button class="dock-tab-btn" id="tabBtnKelas" onclick="switch3DTab('kelas')">
+            <i class="fas fa-chalkboard-user"></i> <span>QR Masal</span>
+          </button>
+        </nav>
+
+        <!-- VIEW 1: SCANNER HUD -->
+        <div class="tab-view-3d active" id="pane-scanner">
+          
+          <!-- Scanner Pedestal -->
+          <div class="scanner-pedestal-3d">
+            <div id="qr-reader"></div>
+
+            <div class="precision-viewfinder" id="hudOverlay">
+              <div class="radar-circle-outer"></div>
+              <div class="radar-circle-inner"></div>
+
+              <div class="reticle-box">
+                <div class="reticle-corner rc-tl"></div>
+                <div class="reticle-corner rc-tr"></div>
+                <div class="reticle-corner rc-bl"></div>
+                <div class="reticle-corner rc-br"></div>
+                <div class="crosshair-target"></div>
+                <div class="laser-scan-beam" id="laserBeam"></div>
+              </div>
+
+              <div class="viewfinder-capsule">
+                <i class="fas fa-qrcode" style="color:var(--primary-light);"></i>
+                <span id="scannerStatusText">Arahkan kamera ke QR Code</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tactile 3D Action Controls -->
+          <div class="scanner-action-bar">
+            <button class="btn-3d-exec btn-primary-3d" id="btnToggleScan" onclick="toggleScanner()">
+              <i class="fas fa-play" id="btnScanIcon"></i> <span id="btnScanText">Mulai Scan</span>
+            </button>
+            <button class="btn-3d-exec btn-icon-3d" id="btnSwitchCamera" onclick="switchCameraMode()" title="Beralih Kamera Depan/Belakang">
+              <i class="fas fa-camera-rotate"></i>
+            </button>
+            <button class="btn-3d-exec btn-icon-3d" id="btnFlash" onclick="toggleFlash()" title="Lampu Flash Kamera">
+              <i class="fas fa-bolt"></i>
+            </button>
+            <button class="btn-3d-exec btn-icon-3d" onclick="triggerFileInput()" title="Pindai QR dari Screenshot / Galeri">
+              <i class="fas fa-image"></i>
+            </button>
+            <input type="file" id="qrFileInput" accept="image/*" style="display:none;" onchange="handleQrFile(this)">
+          </div>
+
+          <!-- Quick Manual Punch -->
+          <div class="manual-punch-bar">
+            <input type="text" class="manual-punch-input" id="manualNimInput" placeholder="Ketik NIM untuk presensi manual..." maxlength="30" onkeypress="if(event.key==='Enter') punchManualNIM()">
+            <button class="btn-3d-exec btn-primary-3d" style="padding: 6px 14px; font-size: 11px;" onclick="punchManualNIM()">
+              <i class="fas fa-check"></i> Hadir
+            </button>
+          </div>
+
+          <div class="scanner-sub-links">
+            <span class="sub-link-item" onclick="triggerFileInput()">
+              <i class="fas fa-upload"></i> Unggah Screenshot QR
+            </span>
+            <span class="sub-link-item" onclick="syncLocalQueue()">
+              <i class="fas fa-cloud-arrow-up"></i> Antrean Offline (<span id="queueCount">0</span>)
+            </span>
+          </div>
+
+        </div>
+
+        <!-- VIEW 2: REAL 3D FLIP KTM DIGITAL -->
+        <div class="tab-view-3d" id="pane-ktm">
+          <div class="ktm-hub-3d">
+            
+            <div class="ktm-search-row">
+              <div class="ktm-search-wrap">
+                <i class="fas fa-user-graduate"></i>
+                <input type="text" class="ktm-search-field" id="ktmNimInput" placeholder="Masukkan atau pilih NIM mahasiswa..." list="ktmDatalist" oninput="autoSelectStudentForKTM()">
+                <datalist id="ktmDatalist"></datalist>
+              </div>
+              <button class="btn-3d-exec btn-primary-3d" onclick="renderKTMCard()">
+                <i class="fas fa-magic"></i> Buat
+              </button>
+            </div>
+
+            <!-- 3D Interactive Flip Card -->
+            <div class="ktm-flip-card-wrapper" id="ktmCardPreview" onclick="toggleCardFlip()">
+              <div class="ktm-card-inner" id="ktmCardInner">
+                
+                <!-- FRONT FACE -->
+                <div class="ktm-card-face ktm-face-front">
+                  <div class="ktm-top-row">
+                    <div class="ktm-univ-text">
+                      <h3>UNIVERSITAS TEKNOLOGI</h3>
+                      <p>KARTU TANDA MAHASISWA DIGITAL</p>
+                    </div>
+                    <div class="ktm-gold-chip"></div>
+                  </div>
+
+                  <div class="ktm-mid-row">
+                    <div class="ktm-avatar-3d" id="ktmAvatarInitials">M</div>
+                    <div class="ktm-meta-data">
+                      <div class="name" id="ktmCardName">Nama Mahasiswa</div>
+                      <div class="nim" id="ktmCardNim">2410510000</div>
+                      <div class="prodi" id="ktmCardJurusan">Teknik Informatika</div>
+                      <div class="prodi" id="ktmCardKelas" style="color:var(--accent-light);">Kelas: TI-24-A</div>
+                    </div>
+                    <div class="ktm-qr-housing">
+                      <img id="ktmCardQrImg" src="" alt="QR Mahasiswa">
+                    </div>
+                  </div>
+
+                  <div class="ktm-btm-row">
+                    <span>SMART PRESENSI 3D CERTIFIED</span>
+                    <span>KLIK KARTU UNTUK MEMBALIK 3D &bull; AKADEMIK 2026/2027</span>
+                  </div>
+                </div>
+
+                <!-- BACK FACE -->
+                <div class="ktm-card-face ktm-face-back">
+                  <div class="mag-stripe"></div>
+                  
+                  <div class="back-credentials">
+                    <strong style="color: #fff;">KETENTUAN KARTU TANDA MAHASISWA</strong>
+                    <p style="margin-top: 4px;">Kartu digital ini merupakan identitas resmi mahasiswa yang sah dalam sistem presensi terpadu perkuliahan.</p>
+                    <p style="margin-top: 3px; color: var(--accent-light);">RFID & Smart Microchip Equipped &bull; ISO-7810 Certified</p>
+                  </div>
+
+                  <div class="barcode-strip">
+                    <div class="barcode-lines"></div>
+                    <div class="barcode-num" id="ktmBarcodeNum">24105100000000</div>
+                  </div>
+
+                  <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted); font-family: var(--font-mono);">
+                    <span>BAGIAN AKADEMIK</span>
+                    <span>KLIK LAGI UNTUK SISI DEPAN</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="ktm-flip-hint" onclick="toggleCardFlip()" id="flipHintText" style="display: none;">
+              <i class="fas fa-rotate"></i> <span>Klik kartu atau teks ini untuk memutar sisi depan/belakang (3D Flip)</span>
+            </div>
+
+            <div id="ktmActionButtons" style="display: none; gap: 10px; justify-content: center; width: 100%;">
+              <button class="btn-3d-exec btn-primary-3d" onclick="downloadKtmCard()">
+                <i class="fas fa-download"></i> Unduh Gambar KTM (PNG)
+              </button>
+              <button class="btn-3d-exec" onclick="printKtmCard()">
+                <i class="fas fa-print"></i> Cetak
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- VIEW 3: QR KELAS PROYECTOR MODE -->
+        <div class="tab-view-3d" id="pane-kelas">
+          <div class="projector-stage">
+            <span class="badge-pro-pill"><i class="fas fa-broadcast-tower"></i> SESI PERKULIAHAN AKTIF</span>
+            
+            <div class="qr-projector-frame">
+              <img id="classMainQrImg" src="" alt="QR Presensi Masal">
+            </div>
+
+            <div>
+              <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 800;">QR Presensi Masal Kelas</h3>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; max-width: 360px;">
+                Tampilkan di layar proyektor depan atau smart TV kelas agar mahasiswa dapat memindai serentak dari ponsel masing-masing.
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+              <button class="btn-3d-exec btn-primary-3d" onclick="openFullscreenProjector()">
+                <i class="fas fa-expand"></i> Mode Layar Penuh (Proyektor)
+              </button>
+              <button class="btn-3d-exec" onclick="downloadClassQR()">
+                <i class="fas fa-download"></i> Unduh QR PNG
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ====================================================================
+           RIGHT PANEL: 3D METRICS & LIVE ATTENDANCE TABLE
+           ==================================================================== -->
+      <section class="panel-card-3d" id="rightPanel3D">
+        <div class="glare-effect"></div>
+
+        <!-- Top Header -->
+        <div class="panel-top-bar">
+          <div class="panel-title">
+            <i class="fas fa-chart-line"></i>
+            <h2>Dashboard Presensi 3D</h2>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-3d-exec btn-icon-3d" onclick="loadAllData()" title="Sinkronkan dengan Google Sheets">
+              <i class="fas fa-rotate"></i>
+            </button>
+            <button class="btn-3d-exec" onclick="exportAttendanceCSV()" title="Ekspor ke CSV / Excel">
+              <i class="fas fa-file-csv"></i> Ekspor
+            </button>
+            <button class="btn-3d-exec btn-icon-3d" onclick="window.print()" title="Cetak Rekap Presensi">
+              <i class="fas fa-print"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3D Stat Blocks Grid -->
+        <div class="stat-blocks-grid">
+          <div class="stat-block-3d total">
+            <div class="stat-block-label">
+              <span>Total Kelas</span>
+              <i class="fas fa-users" style="color:var(--primary-light);"></i>
+            </div>
+            <div class="stat-block-val" id="statTotalVal">0</div>
+            <div class="stat-block-sub">Mahasiswa terdata</div>
+          </div>
+
+          <div class="stat-block-3d hadir">
+            <div class="stat-block-label">
+              <span>Sudah Hadir</span>
+              <i class="fas fa-check-double" style="color:var(--accent-light);"></i>
+            </div>
+            <div class="stat-block-val" id="statHadirVal" style="color:var(--accent-light);">0</div>
+            <div class="stat-block-sub" id="statPersenVal">0% kehadiran</div>
+          </div>
+
+          <div class="stat-block-3d belum">
+            <div class="stat-block-label">
+              <span>Belum Hadir</span>
+              <i class="fas fa-hourglass-half" style="color:var(--warning);"></i>
+            </div>
+            <div class="stat-block-val" id="statBelumVal" style="color:var(--warning);">0</div>
+            <div class="stat-block-sub">Menunggu scan</div>
+          </div>
+        </div>
+
+        <!-- Volumetric Progress Cylinder -->
+        <div class="progress-cylinder">
+          <div class="progress-cylinder-fill" id="attendanceProgressFill"></div>
+        </div>
+
+        <!-- Live Scan Ticker Ribbon -->
+        <div class="ticker-ribbon-3d">
+          <span class="ticker-badge"><i class="fas fa-bolt"></i> BARU SAJA</span>
+          <div class="ticker-message" id="liveTickerText">Belum ada aktivitas presensi terbaru hari ini...</div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="table-tools-box">
+          <div class="table-search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" class="table-search-input" id="tableSearchInput" placeholder="Cari nama mahasiswa, NIM, atau kelas..." oninput="handleTableFilter()">
+          </div>
+
+          <div class="table-filter-pills">
+            <button class="filter-pill-btn active" onclick="setTableFilter('all', this)">Semua (<span id="pillCountAll">0</span>)</button>
+            <button class="filter-pill-btn" onclick="setTableFilter('hadir', this)"><i class="fas fa-check-circle" style="color:var(--accent-light);"></i> Hadir (<span id="pillCountHadir">0</span>)</button>
+            <button class="filter-pill-btn" onclick="setTableFilter('belum', this)"><i class="fas fa-clock" style="color:var(--warning);"></i> Belum (<span id="pillCountBelum">0</span>)</button>
+          </div>
+        </div>
+
+        <!-- Modern Frosted Glass Table -->
+        <div class="table-scroll-container">
+          <table class="attendance-table" id="attendanceTable">
+            <thead>
+              <tr>
+                <th style="width: 32%;">Mahasiswa</th>
+                <th style="width: 25%;">NIM</th>
+                <th style="width: 20%;">Kelas</th>
+                <th style="width: 23%; text-align: right;">Status & Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="attendanceTableBody">
+              <tr>
+                <td colspan="4" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                  <i class="fas fa-circle-notch fa-spin" style="font-size:22px; display:block; margin-bottom:10px; color:var(--primary-light);"></i>
+                  Menghubungkan ke Google Sheets...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       POPUP MODAL PRESENSI BERHASIL
+       ========================================================================== -->
+  <div class="modal-overlay-3d" id="successModalLayer" onclick="closeSuccessModal(event)">
+    <div class="modal-dialog-3d" onclick="event.stopPropagation()">
+      <div class="modal-trophy">
+        <i class="fas fa-check"></i>
+      </div>
+      <div>
+        <h2 style="font-family: var(--font-heading); font-size: 22px; font-weight: 800; color: var(--accent-light);">Presensi Berhasil!</h2>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">Data tercatat otomatis di Google Sheets</p>
+      </div>
+
+      <div class="modal-details-card" id="modalStudentDataBody"></div>
+
+      <button class="btn-3d-exec btn-primary-3d" style="width: 100%; padding: 12px;" onclick="closeSuccessModal()">
+        <i class="fas fa-arrow-right"></i> Lanjutkan Scan
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FULLSCREEN PROJECTOR VIEW
+       ========================================================================== -->
+  <div class="projector-fullscreen-view" id="projectorOverlay">
+    <button class="btn-3d-exec btn-stop-3d" style="position: absolute; top: 25px; right: 25px;" onclick="closeFullscreenProjector()">
+      <i class="fas fa-xmark"></i> Keluar Layar Penuh (ESC)
+    </button>
+    
+    <div style="text-align: center; margin-bottom: 24px;">
+      <span class="badge-pro-pill" style="font-size: 13px; padding: 6px 18px;"><i class="fas fa-chalkboard-teacher"></i> PRESENSI PERKULIAHAN MASAL</span>
+      <h1 style="font-family: var(--font-heading); font-size: 34px; font-weight: 800; margin-top: 12px; color: #fff;">Pindai QR Code Untuk Presensi</h1>
+      <p style="color: rgba(255,255,255,0.7); font-size: 15px; margin-top: 4px;">
+        Arahkan kamera ponsel Anda langsung ke QR Code di layar.
+      </p>
+    </div>
+
+    <div class="qr-projector-frame" style="padding: 24px; border-radius: 28px;">
+      <img id="projectorOverlayQrImg" src="" alt="QR Proyektor" style="width: 320px; height: 320px;">
+    </div>
+
+    <div style="margin-top: 30px; display: flex; gap: 40px; font-family: var(--font-mono);">
+      <div style="text-align: center;">
+        <div style="font-size: 36px; font-weight: 800; color: var(--accent-light);" id="fsStatHadir">0</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px;">SUDAH HADIR</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 36px; font-weight: 800; color: var(--warning);" id="fsStatBelum">0</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 1px;">BELUM HADIR</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MOBILE TOUCH DOCK (SMARTPHONE BOTTOM NAVIGATION)
+       ========================================================================== -->
+  <nav class="mobile-bottom-dock">
+    <button class="m-btn-nav active" onclick="switchMobileView('scanner')">
+      <i class="fas fa-camera"></i>
+      <span>Scanner</span>
+    </button>
+    <button class="m-btn-nav fab-scanner" onclick="switchMobileView('scanner'); if(!State.scanning) startScanner();" title="Quick Scan">
+      <i class="fas fa-qrcode"></i>
+    </button>
+    <button class="m-btn-nav" onclick="switchMobileView('data')">
+      <i class="fas fa-list-check"></i>
+      <span>Hadir</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       JAVASCRIPT ARCHITECTURE, THREE.JS 3D ENGINE & CONTROLS
+       ========================================================================== */ -->
+  <script>
+    const CONFIG = {
+      API_URL: 'https://script.google.com/macros/s/AKfycbwFaiXWeQmp9D1U6YKlNM2u28Dgp8mcnYmzWxoWXH_FS3Po3oWJt1-kknsCZ_yRDranPQ/exec',
+      SHEET_URL: 'https://docs.google.com/spreadsheets/d/1PXOSZAXZNg7hvX-33DglZlM3saj4yclUhiYepiFNYhI/edit?gid=0#gid=0',
+      SHEET_GID_MAHASISWA: '0',
+      SHEET_GID_PRESENSI: '646034675',
+      CACHE_KEY_MAHASISWA: 'presensi_mahasiswa_cache_v2',
+      CACHE_KEY_PRESENSI: 'presensi_hari_ini_cache_v2',
+      CACHE_KEY_OFFLINE_QUEUE: 'presensi_offline_queue_v2',
+      REFRESH_INTERVAL_MS: 30000,
+      RESCAN_DELAY_MS: 2200
+    };
+
+    const State = {
+      scanner: null,
+      scanning: false,
+      flashOn: false,
+      processing: false,
+      facingMode: "environment",
+      mahasiswa: [],
+      presensiHariIni: {},
+      isOnline: false,
+      audioEnabled: true,
+      currentFilter: 'all',
+      searchQuery: '',
+      tanggalHariIni: '',
+      activeMainTab: 'scanner',
+      isCardFlipped: false
+    };
+
+    const $ = id => document.getElementById(id);
+
+    // ==========================================================================
+    // THREE.JS SPATIAL WEBGL 3D BACKGROUND
+    // ==========================================================================
+    let threeScene, threeCamera, threeRenderer, particleSystem;
+
+    function initThreeJSBackground() {
+      const canvas = $('webgl-bg-canvas');
+      if (!canvas || typeof THREE === 'undefined') return;
+
+      threeScene = new THREE.Scene();
+      threeCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      threeCamera.position.z = 80;
+
+      threeRenderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      threeRenderer.setSize(window.innerWidth, window.innerHeight);
+      threeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // Create Particle Constellation Wave
+      const particleCount = 280;
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+
+      const color1 = new THREE.Color(0x6366f1);
+      const color2 = new THREE.Color(0x10b981);
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * 160;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+        const ratio = Math.random();
+        const mixed = color1.clone().lerp(color2, ratio);
+        colors[i * 3] = mixed.r;
+        colors[i * 3 + 1] = mixed.g;
+        colors[i * 3 + 2] = mixed.b;
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({
+        size: 1.8,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending
+      });
+
+      particleSystem = new THREE.Points(geometry, material);
+      threeScene.add(particleSystem);
+
+      // Window Resize Listener
+      window.addEventListener('resize', () => {
+        threeCamera.aspect = window.innerWidth / window.innerHeight;
+        threeCamera.updateProjectionMatrix();
+        threeRenderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // Mouse Move Parallax in 3D
+      let mouseX = 0, mouseY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.02;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.02;
+      });
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (particleSystem) {
+          particleSystem.rotation.y += 0.0012;
+          particleSystem.rotation.x += 0.0006;
+          particleSystem.position.x += (mouseX - particleSystem.position.x) * 0.05;
+          particleSystem.position.y += (-mouseY - particleSystem.position.y) * 0.05;
+        }
+        threeRenderer.render(threeScene, threeCamera);
+      }
+      animate();
+    }
+
+    // ==========================================================================
+    // 3D CARD TILT WITH REALISTIC MOUSE PHYSICS
+    // ==========================================================================
+    function init3DTilt() {
+      const cards = document.querySelectorAll('.panel-card-3d');
+      cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+          if (window.innerWidth < 1024) return;
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const rotateX = ((y - centerY) / centerY) * -5;
+          const rotateY = ((x - centerX) / centerX) * 5;
+
+          card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+        });
+      });
+    }
+
+    // ==========================================================================
+    // KTM 3D FLIP MECHANISM
+    // ==========================================================================
+    function toggleCardFlip() {
+      const wrapper = $('ktmCardPreview');
+      if (!wrapper) return;
+      State.isCardFlipped = !State.isCardFlipped;
+      wrapper.classList.toggle('flipped', State.isCardFlipped);
+    }
+
+    // ==========================================================================
+    // THEME PALETTE MANAGER (Executive, Emerald, Quantum, Light)
+    // ==========================================================================
+    function initTheme() {
+      const saved = localStorage.getItem('smart_presensi_theme_exec') || 'executive';
+      setExecutiveTheme(saved, false);
+    }
+
+    function setExecutiveTheme(themeName, save = true) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      if (save) localStorage.setItem('smart_presensi_theme_exec', themeName);
+
+      document.querySelectorAll('.theme-pill-dot').forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.classList.contains(`dot-${themeName}`)) {
+          dot.classList.add('active');
+        }
+      });
+      showToast(`Tema aktif: ${themeName.toUpperCase()}`, 'info', 1500);
+    }
+
+    // ==========================================================================
+    // AUDIO SYNTHESIZER (Luxury Chime Tones)
+    // ==========================================================================
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function playBeep(type = 'success') {
+      if (!State.audioEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'success') {
+          // Melodic Polyphonic Arpeggio
+          [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+
+            gain.gain.setValueAtTime(0.07, now + idx * 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.05 + 0.35);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now + idx * 0.05);
+            osc.stop(now + idx * 0.05 + 0.35);
+          });
+        } else if (type === 'warning') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(330, now);
+          osc.frequency.setValueAtTime(280, now + 0.1);
+
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, now);
+          osc.frequency.setValueAtTime(120, now + 0.15);
+
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        }
+      } catch (e) {}
+    }
+
+    function toggleAudioFeedback() {
+      State.audioEnabled = !State.audioEnabled;
+      const icon = $('audioIcon');
+      if (State.audioEnabled) {
+        icon.className = 'fas fa-volume-up';
+        showToast('🔊 Efek suara aktif', 'info', 2000);
+        playBeep('success');
+      } else {
+        icon.className = 'fas fa-volume-mute';
+        showToast('🔇 Suara dibisukan', 'info', 2000);
+      }
+    }
+
+    // ==========================================================================
+    // CLOCK & CALENDAR
+    // ==========================================================================
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      if ($('liveClock')) $('liveClock').innerHTML = `${h}:${m}:<span class="sec-pulse">${s}</span> WIB`;
+
+      const options = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+      if ($('liveDateStr')) $('liveDateStr').textContent = now.toLocaleDateString('id-ID', options);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function todayStr() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    // Toast Alert
+    let toastTimer = null;
+    function showToast(message, type = 'info', duration = 3500) {
+      const bar = $('toastStrip');
+      const text = $('toastText');
+      const icon = $('toastIcon');
+      if (!bar || !text) return;
+
+      const icons = {
+        success: 'fa-check-circle',
+        error: 'fa-triangle-exclamation',
+        warning: 'fa-circle-exclamation',
+        info: 'fa-circle-info'
+      };
+
+      bar.className = `toast-strip-3d ${type}`;
+      icon.className = `fas ${icons[type] || 'fa-circle-info'}`;
+      text.textContent = message;
+      bar.style.display = 'flex';
+
+      clearTimeout(toastTimer);
+      if (duration > 0) {
+        toastTimer = setTimeout(() => { bar.style.display = 'none'; }, duration);
+      }
+    }
+
+    function setConnectionStatus(status, message) {
+      const dot = $('statusDot');
+      const label = $('statusLabel');
+      if (!dot || !label) return;
+      dot.className = 'pulse-crystal ' + status;
+      label.textContent = message;
+      State.isOnline = (status === 'online');
+    }
+
+    // ==========================================================================
+    // TAB MANAGEMENT & MOBILE SWITCHER
+    // ==========================================================================
+    function switch3DTab(tabId) {
+      State.activeMainTab = tabId;
+      document.querySelectorAll('.dock-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-view-3d').forEach(pane => pane.classList.remove('active'));
+
+      const activePane = $(`pane-${tabId}`);
+      if (activePane) activePane.classList.add('active');
+
+      const targetBtn = Array.from(document.querySelectorAll('.dock-tab-btn')).find(btn => btn.getAttribute('onclick')?.includes(tabId));
+      if (targetBtn) targetBtn.classList.add('active');
+
+      if (tabId === 'scanner') {
+        if (!State.scanning) startScanner();
+      } else {
+        if (State.scanning) stopScanner();
+      }
+
+      if (tabId === 'ktm') {
+        populateKtmDatalist();
+      }
+    }
+
+    function switchMobileView(view) {
+      document.querySelectorAll('.m-btn-nav').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = Array.from(document.querySelectorAll('.m-btn-nav')).find(btn => btn.getAttribute('onclick')?.includes(view));
+      if (activeBtn) activeBtn.classList.add('active');
+
+      if (view === 'scanner' || view === 'ktm' || view === 'kelas') {
+        switch3DTab(view);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (view === 'data') {
+        const rightCard = $('rightPanel3D');
+        if (rightCard) rightCard.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // ==========================================================================
+    // GOOGLE SHEETS API INTEGRATION & DATA SYNC
+    // ==========================================================================
+    async function apiGet(action, params = {}) {
+      const qs = new URLSearchParams({ action, t: Date.now(), ...params });
+      const res = await fetch(CONFIG.API_URL + '?' + qs.toString(), {
+        method: 'GET',
+        redirect: 'follow'
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }
+
+    async function apiPost(action, payload = {}) {
+      const res = await fetch(CONFIG.API_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action, ...payload })
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    }
+
+    function loadCacheMahasiswa() {
+      try {
+        const raw = localStorage.getItem(CONFIG.CACHE_KEY_MAHASISWA);
+        return raw ? JSON.parse(raw) : [];
+      } catch { return []; }
+    }
+    function saveCacheMahasiswa(data) {
+      try { localStorage.setItem(CONFIG.CACHE_KEY_MAHASISWA, JSON.stringify(data)); } catch {}
+    }
+
+    function loadCachePresensi() {
+      try {
+        const raw = localStorage.getItem(CONFIG.CACHE_KEY_PRESENSI);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (parsed.tanggal !== todayStr()) return null;
+        return parsed.map || {};
+      } catch { return null; }
+    }
+    function saveCachePresensi(map) {
+      try {
+        localStorage.setItem(CONFIG.CACHE_KEY_PRESENSI, JSON.stringify({
+          tanggal: todayStr(),
+          map
+        }));
+      } catch {}
+    }
+
+    function loadOfflineQueue() {
+      try {
+        const raw = localStorage.getItem(CONFIG.CACHE_KEY_OFFLINE_QUEUE);
+        return raw ? JSON.parse(raw) : [];
+      } catch { return []; }
+    }
+    function saveOfflineQueue(queue) {
+      try { localStorage.setItem(CONFIG.CACHE_KEY_OFFLINE_QUEUE, JSON.stringify(queue)); } catch {}
+      updateQueueBadge();
+    }
+    function updateQueueBadge() {
+      const q = loadOfflineQueue();
+      if ($('queueCount')) $('queueCount').textContent = q.length;
+    }
+
+    async function checkConnection() {
+      setConnectionStatus('checking', 'Mengecek server...');
+      try {
+        const json = await apiGet('ping');
+        if (json.success) {
+          setConnectionStatus('online', 'Terhubung ke Google Sheets');
+          return true;
+        }
+        throw new Error(json.error || 'Ping gagal');
+      } catch (err) {
+        setConnectionStatus('offline', 'Mode Offline (Cache Aktif)');
+        return false;
+      }
+    }
+
+    async function loadAllData() {
+      State.tanggalHariIni = todayStr();
+      updateQueueBadge();
+
+      const cachedMhs = loadCacheMahasiswa();
+      if (cachedMhs.length) {
+        State.mahasiswa = cachedMhs;
+        State.presensiHariIni = loadCachePresensi() || {};
+        updateStats();
+        renderTable();
+        populateKtmDatalist();
+      }
+
+      const isOnline = await checkConnection();
+      if (!isOnline) {
+        if (!cachedMhs.length) showTableEmpty('offline');
+        else showToast('Mode Offline: Memakai data tersimpan', 'warning', 3000);
+        return;
+      }
+
+      try {
+        const mhsRes = await apiGet('get_all');
+        if (mhsRes.success && Array.isArray(mhsRes.data)) {
+          State.mahasiswa = mhsRes.data;
+          saveCacheMahasiswa(mhsRes.data);
+        }
+
+        const presRes = await apiGet('get_presensi', { tanggal: todayStr() });
+        if (presRes.success && Array.isArray(presRes.data)) {
+          const map = {};
+          presRes.data.forEach(p => {
+            if (p.nim) map[String(p.nim).trim()] = p;
+          });
+          State.presensiHariIni = map;
+          saveCachePresensi(map);
+        }
+
+        updateStats();
+        renderTable();
+        populateKtmDatalist();
+        showToast(`Sinkron sukses: ${State.mahasiswa.length} mahasiswa`, 'success', 2200);
+
+        syncLocalQueue();
+      } catch (err) {
+        console.error('Sync Error:', err);
+        if (State.mahasiswa.length) {
+          showToast('Koneksi terhambat — memakai cache', 'warning', 3000);
+          renderTable();
+        } else {
+          showTableEmpty('error', err.message);
+        }
+      }
+    }
+
+    async function syncLocalQueue() {
+      const queue = loadOfflineQueue();
+      if (!queue.length) return;
+
+      showToast(`Menyinkronkan ${queue.length} presensi offline...`, 'info', 0);
+      const remaining = [];
+
+      for (const item of queue) {
+        try {
+          const res = await apiPost('presensi', item);
+          if (res.success || res.already) {
+            // Success
+          } else {
+            remaining.push(item);
+          }
+        } catch {
+          remaining.push(item);
+        }
+      }
+
+      saveOfflineQueue(remaining);
+      if (remaining.length === 0) {
+        showToast('Semua presensi offline berhasil terunggah ke Google Sheets!', 'success', 3500);
+      } else {
+        showToast(`Tersisa ${remaining.length} antrean offline`, 'warning', 3000);
+      }
+      loadAllData();
+    }
+
+    // ==========================================================================
+    // STATS & METRICS
+    // ==========================================================================
+    function updateStats() {
+      const total = State.mahasiswa.length;
+      const hadir = Object.keys(State.presensiHariIni).length;
+      const belum = Math.max(0, total - hadir);
+      const persen = total > 0 ? Math.round((hadir / total) * 100) : 0;
+
+      if ($('statTotalVal')) $('statTotalVal').textContent = total;
+      if ($('statHadirVal')) $('statHadirVal').textContent = hadir;
+      if ($('statBelumVal')) $('statBelumVal').textContent = belum;
+      if ($('statPersenVal')) $('statPersenVal').textContent = `${persen}% kehadiran`;
+
+      if ($('fsStatHadir')) $('fsStatHadir').textContent = hadir;
+      if ($('fsStatBelum')) $('fsStatBelum').textContent = belum;
+
+      if ($('pillCountAll')) $('pillCountAll').textContent = total;
+      if ($('pillCountHadir')) $('pillCountHadir').textContent = hadir;
+      if ($('pillCountBelum')) $('pillCountBelum').textContent = belum;
+
+      const fill = $('attendanceProgressFill');
+      if (fill) fill.style.width = `${persen}%`;
+    }
+
+    // ==========================================================================
+    // ATTENDANCE TABLE
+    // ==========================================================================
+    function setTableFilter(filterType, element) {
+      State.currentFilter = filterType;
+      document.querySelectorAll('.table-filter-pills .filter-pill-btn').forEach(p => p.classList.remove('active'));
+      if (element) element.classList.add('active');
+      renderTable();
+    }
+
+    function handleTableFilter() {
+      State.searchQuery = ($('tableSearchInput')?.value || '').toLowerCase().trim();
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = $('attendanceTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (!State.mahasiswa.length) {
+        showTableEmpty('empty');
+        return;
+      }
+
+      let filtered = State.mahasiswa.filter(m => {
+        const nim = String(m.nim || '').toLowerCase();
+        const nama = String(m.nama || '').toLowerCase();
+        const kelas = String(m.kelas || '').toLowerCase();
+        const jurusan = String(m.jurusan || '').toLowerCase();
+        const matchSearch = nim.includes(State.searchQuery) || nama.includes(State.searchQuery) || kelas.includes(State.searchQuery) || jurusan.includes(State.searchQuery);
+
+        const isHadir = !!State.presensiHariIni[String(m.nim || '').trim()];
+        if (State.currentFilter === 'hadir') return matchSearch && isHadir;
+        if (State.currentFilter === 'belum') return matchSearch && !isHadir;
+        return matchSearch;
+      });
+
+      if (!filtered.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 35px; color: var(--text-muted);">
+              <i class="fas fa-magnifying-glass" style="font-size: 20px; margin-bottom: 8px; display: block; opacity: 0.5;"></i>
+              Tidak ada mahasiswa yang cocok dengan pencarian "<strong>${escapeHtml(State.searchQuery)}</strong>"
+            </td>
+          </tr>`;
+        return;
+      }
+
+      filtered.forEach(mhs => {
+        const nim = String(mhs.nim || '').trim();
+        const hadirData = State.presensiHariIni[nim];
+        const isHadir = !!hadirData;
+        const tr = document.createElement('tr');
+        const initial = (mhs.nama || 'M').charAt(0).toUpperCase();
+
+        tr.innerHTML = `
+          <td>
+            <div class="user-profile-flex">
+              <div class="user-avatar-initial">${escapeHtml(initial)}</div>
+              <div>
+                <div style="font-weight: 700; color: var(--text-main);">${escapeHtml(mhs.nama || '-')}</div>
+                <div style="font-size: 11px; color: var(--text-muted);">${escapeHtml(mhs.jurusan || '-')}</div>
+              </div>
+            </div>
+          </td>
+          <td><strong style="font-family: var(--font-mono); color: var(--primary-light);">${escapeHtml(nim)}</strong></td>
+          <td>${escapeHtml(mhs.kelas || '-')}</td>
+          <td style="text-align: right;">
+            <div style="display: inline-flex; align-items: center; gap: 8px;">
+              <span class="status-chip ${isHadir ? 'hadir' : 'belum'}">
+                <i class="fas ${isHadir ? 'fa-check-circle' : 'fa-clock'}"></i>
+                ${isHadir ? (hadirData.waktu ? hadirData.waktu.split(' ')[1] || 'Hadir' : 'Hadir') : 'Belum'}
+              </span>
+              ${!isHadir ? `
+                <button class="btn-table-action" title="Tandai Hadir Manual" onclick="checkInManual('${escapeHtml(nim)}')">
+                  <i class="fas fa-check"></i>
+                </button>
+              ` : ''}
+              <button class="btn-table-action" title="Buka KTM Digital 3D" onclick="openKtmForStudent('${escapeHtml(nim)}')">
+                <i class="fas fa-id-card"></i>
+              </button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showTableEmpty(type, detail = '') {
+      const tbody = $('attendanceTableBody');
+      if (!tbody) return;
+      if (type === 'offline') {
+        tbody.innerHTML = `
+          <tr><td colspan="4" style="text-align: center; padding: 40px;">
+            <i class="fas fa-wifi" style="color:var(--danger); font-size: 28px; display:block; margin-bottom: 10px;"></i>
+            <strong style="color:var(--danger)">Tidak Ada Sambungan Jaringan</strong><br>
+            <span style="font-size: 12px; color: var(--text-muted);">Tidak dapat menghubungi server.</span>
+          </td></tr>`;
+      } else if (type === 'empty') {
+        tbody.innerHTML = `
+          <tr><td colspan="4" style="text-align: center; padding: 40px;">
+            <i class="fas fa-user-slash" style="color:var(--warning); font-size: 28px; display:block; margin-bottom: 10px;"></i>
+            <strong>Belum ada mahasiswa di Google Sheets</strong><br>
+            <span style="font-size: 12px; color: var(--text-muted);">Silakan tambahkan data mahasiswa pada spreadsheet Anda.</span>
+          </td></tr>`;
+      } else {
+        tbody.innerHTML = `
+          <tr><td colspan="4" style="text-align: center; padding: 40px;">
+            <i class="fas fa-triangle-exclamation" style="color:var(--danger); font-size: 28px; display:block; margin-bottom: 10px;"></i>
+            <strong style="color:var(--danger)">Gagal Memuat Data</strong><br>
+            <span style="font-size: 12px; color: var(--text-muted);">${escapeHtml(detail)}</span>
+          </td></tr>`;
+      }
+    }
+
+    // ==========================================================================
+    // 3D SCANNER ENGINE
+    // ==========================================================================
+    function toggleScanner() {
+      if (State.scanning) stopScanner();
+      else startScanner();
+    }
+
+    function switchCameraMode() {
+      State.facingMode = State.facingMode === 'environment' ? 'user' : 'environment';
+      showToast(`Beralih ke kamera ${State.facingMode === 'environment' ? 'belakang' : 'depan'}`, 'info', 1800);
+      if (State.scanning) {
+        stopScanner().then(() => setTimeout(startScanner, 350));
+      }
+    }
+
+    async function startScanner() {
+      if (State.scanning) return;
+      if (State.scanner) {
+        try { await State.scanner.clear(); } catch {}
+        State.scanner = null;
+      }
+
+      const readerEl = $('qr-reader');
+      if (readerEl) readerEl.innerHTML = '';
+
+      updateScanButtonState(true);
+
+      try {
+        State.scanner = new Html5Qrcode("qr-reader", {
+          verbose: false,
+          formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
+        });
+
+        const config = {
+          fps: 15,
+          qrbox: { width: 210, height: 210 },
+          aspectRatio: 1.0
+        };
+
+        const onSuccess = (text) => onScanSuccess(text);
+        const onError = () => {};
+
+        await State.scanner.start({ facingMode: State.facingMode }, config, onSuccess, onError);
+        State.scanning = true;
+        if ($('scannerStatusText')) $('scannerStatusText').textContent = 'Kamera Aktif &bull; Bidik QR Code';
+        if ($('laserBeam')) $('laserBeam').style.display = 'block';
+      } catch (err) {
+        try {
+          const altMode = State.facingMode === 'environment' ? 'user' : 'environment';
+          await State.scanner.start({ facingMode: altMode }, { fps: 12, qrbox: 210 }, (t) => onScanSuccess(t), () => {});
+          State.facingMode = altMode;
+          State.scanning = true;
+          if ($('scannerStatusText')) $('scannerStatusText').textContent = 'Kamera Depan Aktif';
+        } catch (err2) {
+          showToast('Kamera tidak dapat diakses: ' + err2.message, 'error', 5000);
+          playBeep('error');
+          updateScanButtonState(false);
+        }
+      }
+    }
+
+    async function stopScanner() {
+      if (State.scanner && State.scanning) {
+        try {
+          await State.scanner.stop();
+          await State.scanner.clear();
+        } catch (e) {}
+        State.scanner = null;
+      }
+      State.scanning = false;
+      updateScanButtonState(false);
+      if ($('scannerStatusText')) $('scannerStatusText').textContent = 'Scanner berhenti';
+      if ($('laserBeam')) $('laserBeam').style.display = 'none';
+    }
+
+    function updateScanButtonState(isScanning) {
+      const btn = $('btnToggleScan');
+      const icon = $('btnScanIcon');
+      const text = $('btnScanText');
+      if (!btn) return;
+
+      if (isScanning) {
+        btn.classList.add('btn-stop-3d');
+        btn.classList.remove('btn-primary-3d');
+        icon.className = 'fas fa-stop';
+        text.textContent = 'Stop Scan';
+      } else {
+        btn.classList.remove('btn-stop-3d');
+        btn.classList.add('btn-primary-3d');
+        icon.className = 'fas fa-play';
+        text.textContent = 'Mulai Scan';
+      }
+    }
+
+    async function toggleFlash() {
+      State.flashOn = !State.flashOn;
+      const btn = $('btnFlash');
+      if (btn) btn.classList.toggle('active', State.flashOn);
+
+      try {
+        const video = document.querySelector('#qr-reader video');
+        if (!video || !video.srcObject) return;
+        const track = video.srcObject.getVideoTracks()[0];
+        if (!track) return;
+        const caps = track.getCapabilities ? track.getCapabilities() : {};
+        if (caps.torch) {
+          await track.applyConstraints({ advanced: [{ torch: State.flashOn }] });
+        } else {
+          showToast('Flashlight tidak didukung pada kamera ini', 'warning', 2500);
+        }
+      } catch (e) {}
+    }
+
+    function triggerFileInput() {
+      const fileInput = $('qrFileInput');
+      if (fileInput) fileInput.click();
+    }
+
+    function handleQrFile(input) {
+      if (!input.files || input.files.length === 0) return;
+      const file = input.files[0];
+      const html5QrCode = new Html5Qrcode("qr-reader");
+
+      showToast('Memindai gambar QR...', 'info', 0);
+      html5QrCode.scanFile(file, true)
+        .then(decodedText => {
+          onScanSuccess(decodedText);
+          input.value = '';
+        })
+        .catch(err => {
+          playBeep('error');
+          showToast('Gagal membaca QR Code dari file: ' + err, 'error', 3500);
+          input.value = '';
+        });
+    }
+
+    function onScanSuccess(decodedText) {
+      if (State.processing) return;
+      State.processing = true;
+
+      if (navigator.vibrate) navigator.vibrate([70, 40, 70]);
+      processPresensi(decodedText);
+    }
+
+    function punchManualNIM() {
+      const input = $('manualNimInput');
+      const nim = (input ? input.value : '').trim();
+      if (!nim) {
+        showToast('Ketik NIM terlebih dahulu!', 'warning', 2500);
+        if (input) input.focus();
+        return;
+      }
+      processPresensi(nim);
+      if (input) input.value = '';
+    }
+
+    function checkInManual(nim) {
+      processPresensi(nim);
+    }
+
+    async function processPresensi(qrRaw) {
+      const tanggal = todayStr();
+      try {
+        showToast('Memverifikasi presensi...', 'info', 0);
+
+        let nim = '';
+        try {
+          const parsed = JSON.parse(qrRaw);
+          nim = String(parsed.nim || '').trim();
+        } catch {
+          nim = String(qrRaw || '').trim();
+        }
+
+        if (!nim || nim.length < 3) {
+          playBeep('error');
+          showToast('Format QR Code tidak valid!', 'error', 3000);
+          return;
+        }
+
+        const mhs = State.mahasiswa.find(m => String(m.nim).trim() === nim);
+        if (!mhs) {
+          playBeep('error');
+          showToast(`NIM ${nim} tidak terdaftar di kelas!`, 'error', 3500);
+          return;
+        }
+
+        if (State.presensiHariIni[nim]) {
+          playBeep('warning');
+          showToast(`⚠️ ${mhs.nama} sudah tercatat hadir hari ini!`, 'warning', 3500);
+          return;
+        }
+
+        const payload = {
+          nim,
+          nama: mhs.nama || '',
+          kelas: mhs.kelas || '',
+          jurusan: mhs.jurusan || '',
+          mataKuliah: 'Presensi Kelas',
+          status: 'Hadir'
+        };
+
+        let result;
+        try {
+          result = await apiPost('presensi', payload);
+        } catch (netErr) {
+          // OFFLINE FALLBACK
+          const jamNow = new Date().toLocaleTimeString('id-ID');
+          const rec = { nim, tanggal, offline: true, waktu: `${tanggal} ${jamNow}` };
+          State.presensiHariIni[nim] = rec;
+          saveCachePresensi(State.presensiHariIni);
+
+          const q = loadOfflineQueue();
+          q.push(payload);
+          saveOfflineQueue(q);
+
+          updateStats();
+          renderTable();
+          updateLiveTicker(mhs.nama, `${jamNow} (Offline)`);
+          playBeep('success');
+          triggerSuccessConfetti();
+          openSuccessModal(mhs, `${jamNow} (Tersimpan Lokal/Offline)`);
+          return;
+        }
+
+        if (result.success) {
+          const jamRes = result.waktu || new Date().toLocaleTimeString('id-ID');
+          State.presensiHariIni[nim] = {
+            nim,
+            tanggal,
+            waktu: jamRes,
+            nama: mhs.nama
+          };
+          saveCachePresensi(State.presensiHariIni);
+          updateStats();
+          renderTable();
+          updateLiveTicker(mhs.nama, jamRes);
+          playBeep('success');
+          triggerSuccessConfetti();
+          openSuccessModal(mhs, jamRes);
+        } else if (result.already) {
+          playBeep('warning');
+          State.presensiHariIni[nim] = { nim, tanggal, waktu: result.data?.waktu || '' };
+          saveCachePresensi(State.presensiHariIni);
+          updateStats();
+          renderTable();
+          showToast(`⚠️ ${mhs.nama} sudah tercatat sebelumnya`, 'warning', 3500);
+        } else {
+          playBeep('error');
+          showToast('❌ Gagal: ' + (result.error || 'Terjadi kesalahan sistem'), 'error', 4000);
+        }
+
+      } catch (err) {
+        console.error(err);
+        playBeep('error');
+        showToast('Terjadi kesalahan: ' + err.message, 'error', 4000);
+      } finally {
+        setTimeout(() => {
+          State.processing = false;
+        }, CONFIG.RESCAN_DELAY_MS);
+      }
+    }
+
+    function updateLiveTicker(nama, waktu) {
+      if ($('liveTickerText')) {
+        $('liveTickerText').innerHTML = `<strong>${escapeHtml(nama)}</strong> baru saja presensi pada <strong>${escapeHtml(waktu)}</strong>`;
+      }
+    }
+
+    function triggerSuccessConfetti() {
+      try {
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 80,
+            spread: 75,
+            origin: { y: 0.65 },
+            colors: ['#6366f1', '#10b981', '#06b6d4', '#f59e0b']
+          });
+        }
+      } catch (e) {}
+    }
+
+    function openSuccessModal(mhs, waktuStr) {
+      const modal = $('successModalLayer');
+      const details = $('modalStudentDataBody');
+      if (!modal || !details) return;
+
+      details.innerHTML = `
+        <div class="modal-detail-row">
+          <span>Nama Lengkap</span>
+          <span>${escapeHtml(mhs.nama)}</span>
+        </div>
+        <div class="modal-detail-row">
+          <span>Nomor Induk (NIM)</span>
+          <span style="font-family: var(--font-mono); color: var(--primary-light);">${escapeHtml(mhs.nim)}</span>
+        </div>
+        <div class="modal-detail-row">
+          <span>Program Studi / Kelas</span>
+          <span>${escapeHtml(mhs.jurusan || '-')} &bull; ${escapeHtml(mhs.kelas || '-')}</span>
+        </div>
+        <div class="modal-detail-row">
+          <span>Waktu Presensi</span>
+          <span style="color:var(--accent-light); font-weight:800;">${escapeHtml(waktuStr)}</span>
+        </div>
+      `;
+      modal.classList.add('show');
+    }
+
+    function closeSuccessModal() {
+      const modal = $('successModalLayer');
+      if (modal) modal.classList.remove('show');
+    }
+
+    // ==========================================================================
+    // KTM DIGITAL 3D ENGINE
+    // ==========================================================================
+    function populateKtmDatalist() {
+      const datalist = $('ktmDatalist');
+      if (!datalist) return;
+      datalist.innerHTML = '';
+      State.mahasiswa.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = m.nim;
+        opt.label = `${m.nama} (${m.kelas || '-'})`;
+        datalist.appendChild(opt);
+      });
+    }
+
+    function autoSelectStudentForKTM() {
+      const nim = ($('ktmNimInput')?.value || '').trim();
+      const mhs = State.mahasiswa.find(m => String(m.nim).trim() === nim);
+      if (mhs) renderKTMCard();
+    }
+
+    function openKtmForStudent(nim) {
+      switch3DTab('ktm');
+      if ($('ktmNimInput')) $('ktmNimInput').value = nim;
+      renderKTMCard();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderKTMCard() {
+      const input = $('ktmNimInput');
+      const nim = (input ? input.value : '').trim();
+
+      if (!nim) {
+        showToast('Pilih atau ketik NIM mahasiswa', 'warning', 2500);
+        if (input) input.focus();
+        return;
+      }
+
+      const mhs = State.mahasiswa.find(m => String(m.nim).trim() === nim);
+      if (!mhs) {
+        showToast(`NIM ${nim} tidak ditemukan dalam daftar!`, 'error', 3000);
+        return;
+      }
+
+      $('ktmCardName').textContent = mhs.nama || '-';
+      $('ktmCardNim').textContent = mhs.nim;
+      $('ktmCardJurusan').textContent = mhs.jurusan || 'Teknik Informatika';
+      $('ktmCardKelas').textContent = `Kelas: ${mhs.kelas || '-'}`;
+      $('ktmAvatarInitials').textContent = (mhs.nama || 'M').charAt(0).toUpperCase();
+      if ($('ktmBarcodeNum')) $('ktmBarcodeNum').textContent = `${mhs.nim}0000`;
+
+      const qrPayload = {
+        nim: mhs.nim,
+        nama: mhs.nama,
+        kelas: mhs.kelas,
+        jurusan: mhs.jurusan,
+        link_sheet: CONFIG.SHEET_URL,
+        timestamp: new Date().toISOString()
+      };
+
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(JSON.stringify(qrPayload))}`;
+      $('ktmCardQrImg').src = qrUrl;
+
+      $('ktmCardPreview').classList.add('active');
+      const actions = $('ktmActionButtons');
+      if (actions) actions.style.display = 'flex';
+      if ($('flipHintText')) $('flipHintText').style.display = 'flex';
+
+      showToast(`KTM 3D siap untuk ${mhs.nama}`, 'success', 2200);
+    }
+
+    function downloadKtmCard() {
+      const nim = ($('ktmNimInput')?.value || 'student').trim();
+      const canvas = document.createElement('canvas');
+      canvas.width = 800;
+      canvas.height = 480;
+      const ctx = canvas.getContext('2d');
+
+      // 3D Titanium Gradient
+      const grad = ctx.createLinearGradient(0, 0, 800, 480);
+      grad.addColorStop(0, '#0b1120');
+      grad.addColorStop(0.5, '#1e1b4b');
+      grad.addColorStop(1, '#064e3b');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.roundRect(0, 0, 800, 480, 36);
+      ctx.fill();
+
+      // Border Highlight
+      ctx.strokeStyle = '#6366f1';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Header Text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('UNIVERSITAS TEKNOLOGI', 90, 68);
+      ctx.fillStyle = '#818cf8';
+      ctx.font = '14px "JetBrains Mono", monospace';
+      ctx.fillText('KARTU TANDA MAHASISWA 3D DIGITAL', 90, 96);
+
+      // Student Avatar Box
+      ctx.fillStyle = '#4f46e5';
+      ctx.beginPath();
+      ctx.roundRect(50, 150, 130, 130, 24);
+      ctx.fill();
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 64px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      const initial = ($('ktmCardName').textContent || 'M').charAt(0).toUpperCase();
+      ctx.fillText(initial, 115, 238);
+      ctx.textAlign = 'left';
+
+      // Student Meta
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText($('ktmCardName').textContent, 210, 185);
+
+      ctx.fillStyle = '#34d399';
+      ctx.font = 'bold 22px "JetBrains Mono", monospace';
+      ctx.fillText('NIM: ' + $('ktmCardNim').textContent, 210, 225);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.85)';
+      ctx.font = '18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText($('ktmCardJurusan').textContent, 210, 260);
+      ctx.fillStyle = '#a855f7';
+      ctx.fillText($('ktmCardKelas').textContent, 210, 290);
+
+      // QR Image Render
+      const qrImg = $('ktmCardQrImg');
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(570, 130, 180, 180, 20);
+        ctx.fill();
+        ctx.drawImage(img, 580, 140, 160, 160);
+
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.font = '14px "JetBrains Mono", monospace';
+        ctx.fillText('SMART PRESENSI 3D CERTIFIED • TAHUN AKADEMIK 2026/2027', 50, 420);
+
+        const a = document.createElement('a');
+        a.download = `KTM-Digital-${nim}.png`;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+        showToast('KTM Digital berhasil diunduh (PNG)', 'success', 2500);
+      };
+      img.src = qrImg.src;
+    }
+
+    function printKtmCard() {
+      window.print();
+    }
+
+    // ==========================================================================
+    // QR KELAS & FULLSCREEN PROJECTOR
+    // ==========================================================================
+    function generateClassQR() {
+      const classPayload = {
+        nim: 'ABSENSI-KELAS',
+        nama: 'Presensi Kelas Masal',
+        kelas: 'Semua',
+        jurusan: 'Semua',
+        link_sheet: CONFIG.SHEET_URL,
+        timestamp: new Date().toISOString()
+      };
+
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=450x450&data=${encodeURIComponent(JSON.stringify(classPayload))}`;
+      if ($('classMainQrImg')) $('classMainQrImg').src = qrUrl;
+      if ($('projectorOverlayQrImg')) $('projectorOverlayQrImg').src = qrUrl;
+    }
+
+    function downloadClassQR() {
+      const img = $('classMainQrImg');
+      if (!img || !img.src) return;
+
+      const a = document.createElement('a');
+      a.download = `QR-Presensi-Kelas-Utama.png`;
+      a.href = img.src;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('QR Kelas berhasil diunduh', 'success', 2000);
+    }
+
+    function openFullscreenProjector() {
+      const overlay = $('projectorOverlay');
+      if (!overlay) return;
+      overlay.classList.add('active');
+
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    }
+
+    function closeFullscreenProjector() {
+      const overlay = $('projectorOverlay');
+      if (overlay) overlay.classList.remove('active');
+
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeFullscreenProjector();
+    });
+
+    // ==========================================================================
+    // CSV EXPORT
+    // ==========================================================================
+    function exportAttendanceCSV() {
+      if (!State.mahasiswa.length) {
+        showToast('Tidak ada data untuk diekspor', 'warning', 2500);
+        return;
+      }
+
+      let csv = 'No,NIM,Nama Mahasiswa,Jurusan,Kelas,Status,Waktu Presensi\n';
+      State.mahasiswa.forEach((m, idx) => {
+        const nim = String(m.nim || '').trim();
+        const hadir = State.presensiHariIni[nim];
+        const status = hadir ? 'Hadir' : 'Belum Hadir';
+        const waktu = hadir ? (hadir.waktu || 'Hadir') : '-';
+        csv += `"${idx + 1}","${m.nim}","${m.nama || ''}","${m.jurusan || ''}","${m.kelas || ''}","${status}","${waktu}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.download = `Rekap-Presensi-3D-${todayStr()}.csv`;
+      a.href = url;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('File CSV berhasil diunduh', 'success', 2500);
+    }
+
+    // ==========================================================================
+    // INITIALIZATION
+    // ==========================================================================
+    async function initApp() {
+      initTheme();
+      initThreeJSBackground();
+      init3DTilt();
+
+      const sheetUrlPresensi = CONFIG.SHEET_URL.split('#')[0] + '#gid=' + CONFIG.SHEET_GID_PRESENSI;
+      if ($('sheetLink')) $('sheetLink').href = sheetUrlPresensi;
+
+      generateClassQR();
+      await loadAllData();
+
+      setTimeout(startScanner, 600);
+      setInterval(loadAllData, CONFIG.REFRESH_INTERVAL_MS);
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+
+    window.addEventListener('beforeunload', () => {
+      if (State.scanner && State.scanning) {
+        State.scanner.stop().catch(() => {});
+      }
+    });
+  </script>
+</body>
+</html>
